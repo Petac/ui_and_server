@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pitch of eGFR app</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Pitch of eGFR app">
+  <meta name="author" content="PAC">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Pitch of eGFR app</h1>
+    <h2>Comparison of calculations via old and new formula</h2>
+    <p>PAC<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Why is this important</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Clinicians want to know the difference between new and old formula</li>
+<li>The new formula works better at the extreme values</li>
+<li>It is a part of my project</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>How is it build</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>In the sidebarpanel there are two sections.</h3>
+
+<ol>
+<li>Documentation<br>
+    Documenting what to do to make the app run.</li>
+<li>Input boxes<br>
+    Two numeric input boxes with default values and limits<br>
+    One select input box with default and two options<br>
+    One action button -to send values to the plot<br></li>
+</ol>
+
+<h3>In the mainpanel there are also two sections.</h3>
+
+<ol>
+<li>Showing the output of the two calculations</li>
+<li>Plot displaying the current values -after pressing the action button</li>
+</ol>
+
+<p>The next slide show the formulas used for calculation.</p>
+
+<p>The last slide show evaluation of the formulas.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Formulas for calculation</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">NewEgfr&lt;-function(increa,insex,inage){
+        if (insex==&quot;Female&quot; &amp; increa&gt;62)
+                return(round(144*(increa/(0.7*88.4))^-1.209*0.993^inage))
+        if(insex==&quot;Female&quot; &amp; increa&lt;63)
+                return(round(144*(increa/(0.7*88.4))^-0.329*0.993^inage))
+        if (insex==&quot;Male&quot; &amp; increa&gt;80)
+                return(round(141*(increa/(0.9*88.4))^-1.209*0.993^inage))
+        if (insex==&quot;Male&quot; &amp; increa&lt;81)
+                return(round(141*(increa/(0.9*88.4))^-0.411*0.993^inage))
+}
+OldEgfr&lt;-function(increa,insex,inage){
+        if (insex==&quot;Male&quot;)
+                return(round(175*(increa/(88.4))^-1.154*inage^-0.203))
+        if(insex==&quot;Female&quot;)
+                return(round(175*(increa/(88.4))^-1.154*inage^-0.203*0.742))
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h3>Evaluation of formulas with two examples</h3>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">NewEgfr(60,&quot;Male&quot;,80)
+</code></pre>
+
+<pre><code>## [1] 90
+</code></pre>
+
+<pre><code class="r">OldEgfr(60,&quot;Male&quot;,80)
+</code></pre>
+
+<pre><code>## [1] 112
+</code></pre>
+
+<pre><code class="r">NewEgfr(4,&quot;Male&quot;,80)
+</code></pre>
+
+<pre><code>## [1] 275
+</code></pre>
+
+<pre><code class="r">OldEgfr(4,&quot;Male&quot;,80) #end
+</code></pre>
+
+<pre><code>## [1] 2559
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Why is this important'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='How is it build'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Formulas for calculation'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Evaluation of formulas with two examples'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
